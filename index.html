@@ -4,14 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles.css" rel="stylessheet">
     <title>Code Quiz</title>
 </head>
 <body>
-    <header>
-        <div class="title-text">Code quiz</div>
-        <p id="intro">Welcome lets test your knowledge about coding.</p>
-        <button class="start-quiz">Start Quiz!</button>
-    </header>
+    <div class="box">
+        <div class="quiz-box" class="hide">
+            <div id="questions">Questions</div>
+            <div id="answer-butns" class="butn-card">
+                <button class="butn">A</button>
+                <button class="butn">B</button>
+                <button class="butn">C</button>
+                <button class="butn">D</button>
+            </div>
+        </div>
+        <div class="start-next">
+            <button id="start-butn" class="start-butn butn">Start Quiz!</button>
+            <button id="next-butn" class="next-butn butn hide">next!</button>
+        </div>
+    </div>
+
     <script src="script.js"></script>
+
 </body>
 </html>
