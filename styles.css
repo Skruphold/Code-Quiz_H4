@@ -16,6 +16,10 @@ body {
     border-radius: 10px;
     padding: 10px;
 }
+#timer {
+    display: flex;
+    justify-content: end;
+}
 
 .butn-card {
     display: grid;
