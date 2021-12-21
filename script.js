@@ -102,7 +102,7 @@ function showQuestions(questions) {
         }
         button.addEventListener('click', chooseAnswer);
         answersEl.appendChild(button);
-        questionCount = + 1;
+        // questionCount = questionCount + 1;
     })
 }
 
@@ -118,6 +118,7 @@ function chooseAnswer(e) {
         startButton.innerText = 'restart'
         startButton.classList.remove('hide')
     }
+    questionCount = questionCount + 1;
 }
 
 function setClass(element, correct) {
@@ -143,7 +144,7 @@ function loseGame() {
 }
 
 function winGame() {
-    if (questionCount === 2) {
+    if (questionCount === 3) {
         clearTimer()
         prompt ("please enter your initials!")
     }
