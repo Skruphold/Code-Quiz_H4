@@ -1,10 +1,12 @@
 const startButton = document.getElementById('start-butn');
+const nextButton = document.getElementById('next-butn');
 const quizBoxEl = document.getElementById('quiz-box');
 var timerEl = document.getElementById('timer');
 const questionEl = document.getElementById('questions')
-const AnswersEl = document.getElementById('answer-butns')
+const answersEl = document.getElementById('answer-butns')
+const buttons = document.getElementsByClassName('butn')
 
-const shuffleQuestions, nextQuestionindex;
+let shuffleQuestions, nextQuestionindex;
 
 var timer;
 var timerCount;
@@ -15,8 +17,11 @@ const questions = [
         answers: [
             {text: 'Boolean', correct: true},
             {text:'String', correct: false},
-            {text: 'number', correct: false}
+            {text: 'number', correct: false},
+            {text: 'function', correct: false}
         ]
+
+
     }
 ]
 
@@ -45,14 +50,29 @@ function startTimer() {
 }
 
 function nextQuestion() {
+    resetQuestion();
     showQuestions(shuffleQuestions[nextQuestionindex])
 }
 
-function showQuestions(questions) {
-    questionEl.innerText = questions.questions
+function resetQuestion() {
+    nextButton.classList.add('hide');
 }
 
-function chooseAnswer() {
+function showQuestions(questions) {
+    questionEl.innerText = questions.question
+    questions.answers.forEach(answer => {
+        const button = document.createElement('button');
+        button.innerText= answer.text;
+        button.classList.add('butn');
+        if (answer.correct) {
+            button.dataset.correct= answer.correct;
+        }
+        button.addEventListener('click', chooseAnswer);
+        answersEl.appendChild(button);
+    })
+}
+
+function chooseAnswer(e) {
 
 }
 
