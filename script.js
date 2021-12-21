@@ -1,9 +1,24 @@
 const startButton = document.getElementById('start-butn');
 const quizBoxEl = document.getElementById('quiz-box');
 var timerEl = document.getElementById('timer');
+const questionEl = document.getElementById('questions')
+const AnswersEl = document.getElementById('answer-butns')
+
+const shuffleQuestions, nextQuestionindex;
 
 var timer;
 var timerCount;
+
+const questions = [
+    {
+        question:'What data type has true and false values?',
+        answers: [
+            {text: 'Boolean', correct: true},
+            {text:'String', correct: false},
+            {text: 'number', correct: false}
+        ]
+    }
+]
 
 startButton.addEventListener('click', startQuiz);
 
@@ -12,9 +27,10 @@ function startQuiz() {
     timerCount = 30;
     startButton.classList.add('hide');
     quizBoxEl.classList.remove('hide');
+    shuffleQuestions = questions.sort(() =>Math.random()-.5);
+    nextQuestionindex = 0;
     startTimer();
     nextQuestion();
-
 }
 
 function startTimer() {
@@ -29,7 +45,11 @@ function startTimer() {
 }
 
 function nextQuestion() {
+    showQuestions(shuffleQuestions[nextQuestionindex])
+}
 
+function showQuestions(questions) {
+    questionEl.innerText = questions.questions
 }
 
 function chooseAnswer() {
