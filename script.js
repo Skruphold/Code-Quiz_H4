@@ -4,7 +4,7 @@ const quizBoxEl = document.getElementById('quiz-box');
 var timerEl = document.getElementById('timer');
 const questionEl = document.getElementById('questions')
 const answersEl = document.getElementById('answer-butns')
-const buttons = document.getElementsByClassName('butn')
+// const buttons = document.getElementsByClassName('butn')
 
 let shuffleQuestions, nextQuestionindex;
 
@@ -20,12 +20,32 @@ const questions = [
             {text: 'number', correct: false},
             {text: 'function', correct: false}
         ]
-
-
+    },
+    {
+        question:'Inside which HTML element do we put JavaScript?',
+        answers: [
+            {text: '<scripting>', correct: false},
+            {text: '<javascript', correct: false},
+            {text: '<script>', correct: true},
+            {text: '<js>', correct: false},
+        ]
+    },
+    {
+        question:'What is the correct place to insert a Javascript?',
+        answers: [
+            {text:'<head>', correct: false},
+            {text:'Both  <head> and <body> section.', correct: true},
+            {text:'<Body> section', correct: false},
+            {text:'<footer>', correct: false},
+        ]
     }
 ]
 
 startButton.addEventListener('click', startQuiz);
+nextButton.addEventListener('click', () => {
+    nextQuestionindex ++
+    nextQuestion();
+})
 
 function startQuiz() {
     // console.log('started')
@@ -46,17 +66,21 @@ function startTimer() {
             clearInterval(timer);
             loseGame();
         }
+        if (!questions) {
+            loseGame();
+        }
     }, 1000);
 }
 
 function nextQuestion() {
-    resetQuestion();
+    // resetQuestion();
     showQuestions(shuffleQuestions[nextQuestionindex])
 }
 
-function resetQuestion() {
-    nextButton.classList.add('hide');
-}
+// function resetQuestion() {
+//     nextButton.classList.add('hide');
+//     // buttons.classList.add('hide');
+// }
 
 function showQuestions(questions) {
     questionEl.innerText = questions.question
@@ -73,10 +97,39 @@ function showQuestions(questions) {
 }
 
 function chooseAnswer(e) {
+    const chosenButton = e.target
+    const correct = chosenButton.dataset.correct
+    setClass(document.body, correct)
+    Array.from(answersEl.children).forEach(button => {
+        setClass(button, button.dataset.correct)
+    })
+    if(shuffleQuestions.length > nextQuestionindex + 1) {
+    nextButton.classList.remove('hide');
+    } else {
+        startButton.innerText = 'restart'
+        startButton.classList.remove('hide')
+    }
+}
 
+function setClass(element, correct) {
+    clearStatus(element);
+    if (correct) {
+        element.classList.add('correct')
+    } else {
+        element.classList.add('wrong')
+    }
+}
+
+function clearStatus(element) {
+    element.classList.remove('correct')
+    element.classList.remove('wrong')
 }
 
 function loseGame() {
     startButton.classList.remove('hide');
     quizBoxEl.classList.add('hide');
+    if (loseGame) {
+        prompt ("please enter your initials");
+    }
 }
+
