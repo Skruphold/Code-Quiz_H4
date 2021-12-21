@@ -11,6 +11,8 @@ let shuffleQuestions, nextQuestionindex;
 var timer;
 var timerCount;
 
+var questionCount = 0
+
 const questions = [
     {
         question:'What data type has true and false values?',
@@ -65,22 +67,29 @@ function startTimer() {
         if (timerCount === 0) {
             clearInterval(timer);
             loseGame();
+        } 
+        if (winGame) {
+            winGame();
         }
-        if (!questions) {
-            loseGame();
-        }
+
     }, 1000);
 }
 
+function clearTimer() {
+    clearInterval(timerCount);
+}
+
 function nextQuestion() {
-    // resetQuestion();
+    resetQuestion();
     showQuestions(shuffleQuestions[nextQuestionindex])
 }
 
-// function resetQuestion() {
-//     nextButton.classList.add('hide');
-//     // buttons.classList.add('hide');
-// }
+function resetQuestion() {
+    nextButton.classList.add('hide')
+    while (answersEl.firstChild) {
+        answersEl.removeChild(answersEl.firstChild)
+    }
+}
 
 function showQuestions(questions) {
     questionEl.innerText = questions.question
@@ -93,13 +102,13 @@ function showQuestions(questions) {
         }
         button.addEventListener('click', chooseAnswer);
         answersEl.appendChild(button);
+        questionCount = + 1;
     })
 }
 
 function chooseAnswer(e) {
     const chosenButton = e.target
     const correct = chosenButton.dataset.correct
-    setClass(document.body, correct)
     Array.from(answersEl.children).forEach(button => {
         setClass(button, button.dataset.correct)
     })
@@ -132,4 +141,13 @@ function loseGame() {
         prompt ("please enter your initials");
     }
 }
+
+function winGame() {
+    if (questionCount === 2) {
+        clearTimer()
+        prompt ("please enter your initials!")
+    }
+}
+
+functi
 
