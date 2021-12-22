@@ -145,24 +145,36 @@ function loseGame() {
     startButton.classList.remove('hide');
     quizBoxEl.classList.add('hide');
     if (loseGame) {
-        var initialPrompt = prompt ("please enter your initials");
-        if (initialPrompt) {
-            getScore();
-        }
+        initials()
+        return;
+        // var initialPrompt = prompt ("please enter your initials");
+        // if (initialPrompt) {
+            // getScore();
+        
     }
 }
 
 function winGame() {
     if (questionCount === 3) {
         clearTimer()
-        var initialPrompt = prompt ("please enter your initials!");
-        if (initialPrompt) {
-            getScore();
-        }
+        initials()
+        return;
+        // var initialPrompt = prompt("please enter your initials!");
+        // if (initialPrompt) {
+        //     getScore();
+        //     return;
+        // }
     }
+    return;
 }
 
 function getScore() {
-    scoreCount = score;
+    scoreCount = text.score;
     initialsSave 
+}
+
+function initials() {
+    var input = prompt("initials please");
+    localStorage.setItem("input", input);
+    location.replace("./Winlose.html");
 }
