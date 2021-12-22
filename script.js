@@ -4,14 +4,17 @@ const quizBoxEl = document.getElementById('quiz-box');
 var timerEl = document.getElementById('timer');
 const questionEl = document.getElementById('questions')
 const answersEl = document.getElementById('answer-butns')
+var scoreCount = document.getElementById('score')
+var initialsSave = document.getElementById('initials')
 // const buttons = document.getElementsByClassName('butn')
 
 let shuffleQuestions, nextQuestionindex;
 
 var timer;
 var timerCount;
-
+var score = 0
 var questionCount = 0
+// var initial = prompt
 
 const questions = [
     {
@@ -119,6 +122,9 @@ function chooseAnswer(e) {
         startButton.classList.remove('hide')
     }
     questionCount = questionCount + 1;
+    if (correct) {
+        score = score + 10;
+    }
 }
 
 function setClass(element, correct) {
@@ -139,16 +145,24 @@ function loseGame() {
     startButton.classList.remove('hide');
     quizBoxEl.classList.add('hide');
     if (loseGame) {
-        prompt ("please enter your initials");
+        var initialPrompt = prompt ("please enter your initials");
+        if (initialPrompt) {
+            getScore();
+        }
     }
 }
 
 function winGame() {
     if (questionCount === 3) {
         clearTimer()
-        prompt ("please enter your initials!")
+        var initialPrompt = prompt ("please enter your initials!");
+        if (initialPrompt) {
+            getScore();
+        }
     }
 }
 
-
-
+function getScore() {
+    scoreCount = score;
+    initialsSave 
+}
